@@ -789,6 +789,21 @@ feathers-hooks@^2.0.1, feathers-hooks@^2.0.2:
     feathers-commons "^0.8.6"
     uberproto "^1.2.0"
 
+feathers-memory@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/feathers-memory/-/feathers-memory-1.1.0.tgz#da7b23ebeec46fa81bcee4778191287581d5c2a6"
+  dependencies:
+    feathers-commons "^0.8.0"
+    feathers-errors "^2.0.1"
+    feathers-query-filters "^2.0.0"
+    uberproto "^1.2.0"
+
+feathers-query-filters@^2.0.0:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/feathers-query-filters/-/feathers-query-filters-2.1.2.tgz#cdb18224db5e19cc0140d528108e0908d5eb0654"
+  dependencies:
+    feathers-commons "^0.8.0"
+
 feathers-rest@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/feathers-rest/-/feathers-rest-1.8.0.tgz#3c03f1ea56adec940a8f9823d87a3aafeb9742a9"
