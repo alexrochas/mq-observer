@@ -1,43 +1,56 @@
 const socket = io();
 const client = feathers();
 
-// Create the Feathers application with a `socketio` connection
 client.configure(feathers.socketio(socket));
 
-// Get the service for our `messages` endpoint
 const messages = client.service('messages');
+const connections = client.service('connections');
 
-// Add a new message to the list
-function addMessage(message) {
-  const chat = document.querySelector('.chat');
+const toObj = (arr) => {
+  const data = {};
 
-  chat.insertAdjacentHTML('beforeend', `<div class="message flex flex-row">
-    <img src="https://placeimg.com/64/64/any" alt="${message.name}" class="avatar">
-    <div class="message-wrapper">
-      <p class="message-header">
-        <span class="username font-600">${message.name}</span>
-      </p>
-      <p class="message-content font-300">${message.text}</p>
-    </div>
-  </div>`);
-
-  chat.scrollTop = chat.scrollHeight - chat.clientHeight;
-}
-
-messages.find().then(page => page.data.forEach(addMessage));
-messages.on('created', addMessage);
-
-document.getElementById('send-message').addEventListener('submit', function(ev) {
-  const nameInput = document.querySelector('[name="name"]');
-  // This is the message text input field
-  const textInput = document.querySelector('[name="text"]');
-
-  // Create a new message and then clear the input field
-  client.service('messages').create({
-    text: textInput.value,
-    name: nameInput.value
-  }).then(() => {
-    textInput.value = '';
+  $(arr).each((index, obj) => {
+    data[obj.name] = obj.value;
   });
-  ev.preventDefault();
+
+  return data;
+};
+
+const generateTracker = ({name}, trackerId) => `
+  <div class="col-md-3">
+    <h4>${name}</h4>
+    <textarea style="width: 100%" readonly="readonly" id="${trackerId}"></textarea>
+  </div>
+`;
+
+const updateTracker = ({id, message}) => {
+  const tracker = $(`#${id}`);
+  let payload = tracker.val().trim();
+
+  if (payload.length) {
+    payload+= `\n ${message}`;
+  } else {
+    payload = message;
+  }
+
+  tracker.val(payload);
+  tracker[0].scrollTop = tracker[0].scrollHeight;
+};
+
+messages.on('created', updateTracker);
+
+$('#tracker-form').on('submit', function(e) {
+  e.preventDefault();
+
+  const trackerId = uuidv4();
+  const data = toObj($(this).serializeArray());
+  const trackerHtml = generateTracker(data, trackerId);
+  $('#trackers-list').append(trackerHtml);
+  connections.create({
+    id: trackerId,
+    name: data.name,
+    exchange: data.exchange,
+    url: data.url
+  });
 });
+
