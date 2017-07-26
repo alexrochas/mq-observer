@@ -1,6 +1,5 @@
-# mq-observer
-
-> 
+# MQ Observer
+> simple app to visualize MQ events
 
 ## About
 
