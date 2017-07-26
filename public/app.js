@@ -17,7 +17,7 @@ const toObj = (arr) => {
 };
 
 const generateTracker = ({name}, trackerId) => `
-  <div class="col-md-3">
+  <div class="col-md-6">
     <h4>${name}</h4>
     <textarea style="width: 100%" readonly="readonly" id="${trackerId}"></textarea>
   </div>

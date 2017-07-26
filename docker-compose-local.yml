@@ -1,0 +1,10 @@
+mq:
+  log_driver: "none"
+  image: rabbitmq:3.5.6-management
+  net: "host"
+  expose:
+    - "5672"
+  environment:
+    RABBITMQ_DEFAULT_USER: admin
+    RABBITMQ_DEFAULT_PASS: admin
+
