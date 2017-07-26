@@ -18,9 +18,15 @@ const toObj = (arr) => {
 
 const generateTracker = ({name}, trackerId) => `
   <div class="col-md-6 tracker">
-    <h4 style="float:left">${name}</h4>
-    <button style="float:right" data-tracker="${trackerId}">X</button>
-    <textarea style="width: 100%" readonly="readonly" id="${trackerId}"></textarea>
+    <div class="card">
+      <div class="card-header">
+        <h4 style="float:left">${name}</h4>
+        <button style="float:right" class="btn btn-primary" data-tracker="${trackerId}">X</button>
+      </div>
+      <div class="card-block">
+        <textarea style="width: 100%" class="form-control" readonly="readonly" id="${trackerId}"></textarea>
+      </div>
+    </div>
   </div>
 `;
 
@@ -42,7 +48,7 @@ messages.on('created', updateTracker);
 
 $(document).on('click', `.tracker button`, function() {
   const trackerId = $(this).data('tracker');
-  $(this).parent().remove();
+  $(this).parent().parent().parent().remove();
   connections.remove(trackerId);
 });
 
