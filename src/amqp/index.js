@@ -50,7 +50,30 @@ function consumeQueue(id, mq, exchange, messages, cb){
     })
 }
 
+function cancelQueue(id, mq, exchange) {
+  var ctx = {};
+  return amqp.connect(mq)
+    .then (conn => {
+      ctx.conn = conn;
+      return conn.createChannel()
+    }).then (channel => {
+      ctx.channel = channel;
+      return channel.assertQueue('', {
+        durable: false,
+        exclusive: true,
+        autoDelete: true
+      })
+    }).then ( queue => {
+      ctx.queue = queue;
+      return ctx.channel.bindQueue(queue.queue, exchange,"#")
+    }).then ( () => {
+      console.log("Cancel bind to queue [name: %s]", mq);
+      ctx.channel.cancel(id);
+    })
+}
+
 module.exports = {
   consumeQueue: consumeQueue,
+  cancelQueue: cancelQueue,
   msgReceived: msgReceived,
 };

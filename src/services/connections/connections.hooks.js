@@ -2,6 +2,8 @@
 
 const createConnection = require('../../hooks/create-connection');
 
+const removeConnection = require('../../hooks/remove-connection');
+
 module.exports = {
   before: {
     all: [],
@@ -10,7 +12,7 @@ module.exports = {
     create: [createConnection()],
     update: [],
     patch: [],
-    remove: []
+    remove: [removeConnection()]
   },
 
   after: {
