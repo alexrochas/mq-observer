@@ -1,13 +1,12 @@
 # MQ Observer
 > simple app to visualize MQ events
 
-## About
-
-This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
+The main objective of this project is to be able to visualize a copy of every event sent to a topic.
+This was useful at the time I needed to track many events at the same time.
 
 ## Getting Started
 
-Getting up and running is as easy as 1, 2, 3.
+This project uses [Feathers](http://feathersjs.com). Getting up and running is as easy as 1, 2, 3.
 
 1. Make sure you have [NodeJS](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed.
 2. Install your dependencies
@@ -22,35 +21,16 @@ Getting up and running is as easy as 1, 2, 3.
     npm start
     ```
 
-## Testing
+4. Access http://localhost:3030 and you should see:
 
-Simply run `npm test` and all your tests in the `test/` directory will be run.
+![example](example.png)
 
-## Scaffolding
+Fill the fields with:
 
-Feathers has a powerful command line interface. Here are a few things it can do:
+ - name, simbolic name to show in the header
+ - url, in the format **amqp://user:pass@host:10000/vhost**
+ - exchange, name of the exchange (must be a **topic**)
+ 
+## Meta
 
-```
-$ npm install -g feathers-cli             # Install Feathers CLI
-
-$ feathers generate service               # Generate a new Service
-$ feathers generate hook                  # Generate a new Hook
-$ feathers generate model                 # Generate a new Model
-$ feathers help                           # Show all commands
-```
-
-## Help
-
-For more information on all the things you can do with Feathers visit [docs.feathersjs.com](http://docs.feathersjs.com).
-
-## Changelog
-
-__0.1.0__
-
-- Initial release
-
-## License
-
-Copyright (c) 2016
-
-Licensed under the [MIT license](LICENSE).
+Alex Rocha - [about.me](http://about.me/alex.rochas)
